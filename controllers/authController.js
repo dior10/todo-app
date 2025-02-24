@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const { generateToken } = require('../config/auth');
+const bcrypt = require('bcryptjs');
 
 const authController = {
     register: async (req, res) => {
@@ -12,7 +13,7 @@ const authController = {
         res.status(500).json({ message: 'Registration failed' });
     }
 },
-login: async (req, res) => {
+    login: async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findByUsername(username);
