@@ -1,88 +1,129 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Tugas - Register, Login & Task</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Manajemen Tugas - Register & Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...YOUR_INTEGRITY_HASH..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
-    <nav>
-        <ul>
-            <li><a href="#register-container">Register</a></li>
-            <li><a href="#login-container">Login</a></li>
-            <li><a href="#task-container">Manajemen Tugas</a></li>
-        </ul>
+  <div id="register-container" class="container">
+    <i class="fas fa-user fa-2x"></i>
+    <h2>Register</h2>
+    
+    <div class="input-group">
+      <input type="text" id="reg-username" required>
+      <label for="reg-username" style="color: black;">Username</label>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="reg-password" required>
+      <label for="reg-password" style="color: black;">Password</label>
+    </div>
+
+    <button onclick="registerUser()">Register</button>
+    <p><b>Login ke akun yang sudah ada?</b> <a onclick="showLogin()">Login</a></p>
+  </div>
+
+  <div id="login-container" class="container hidden">
+    <i class="fas fa-user fa-2x"></i>
+    <h2>Login</h2>
+    
+    <div class="input-group">
+      <input type="text" id="login-username" required>
+      <label for="login-username" style="color: black;">Username</label>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="login-password" required>
+      <label for="login-password" style="color: black;">Password</label>
+    </div>
+
+    <button onclick="loginUser()">Login</button>
+    <p><b>Buat akun baru?</b> <a onclick="showRegister()">Register</a></p>
+  </div>    
+
+  <div id="task-container" class="hidden">
+    <nav class="navbar">
+      <h2>Welcome!</h2>
+      <button class="logout-btn" onclick="logout()"><i class="fa fa-sign-out-alt"></i> Logout</button>
     </nav>
     
-    <div id="register-container" class="container">
-        <h2>Register</h2>
-        <div class="input-group">
-            <input type="text" id="reg-username" required>
-            <label for="reg-username">Username</label>
-        </div>
-        <div class="input-group">
-            <input type="password" id="reg-password" required>
-            <label for="reg-password">Password</label>
-        </div>
-        <button onclick="registerUser()">Register</button>
-        <p><b>Sudah punya akun?</b> <a onclick="showLogin()">Login</a></p>
+    <div id="tambahtugas-container" class="tambahtugas-container">
+      <h2>Tambah Tugas Baru</h2>
+      <input type="text" id="task-title" placeholder="Judul Tugas">
+      <select id="task-category">
+        <option value="" disabled selected>Pilih Kategori</option>
+        <option value="Kuliah">Kuliah</option>
+        <option value="Organisasi">Organisasi</option>
+        <option value="Pribadi">Pribadi</option>
+      </select>
+      <input type="date" id="task-deadline">
+      <button onclick="addTask()" style="border: 0;"><i class="fa fa-plus" style="padding: 10px;"></i>Tambah</button>
     </div>
-    
-    <div id="login-container" class="container hidden">
-        <h2>Login</h2>
-        <div class="input-group">
-            <input type="text" id="login-username" required>
-            <label for="login-username">Username</label>
-        </div>
-        <div class="input-group">
-            <input type="password" id="login-password" required>
-            <label for="login-password">Password</label>
-        </div>
-        <button onclick="loginUser()">Login</button>
-        <p><b>Belum punya akun?</b> <a onclick="showRegister()">Register</a></p>
+
+    <h2>Daftar Tugas</h2>
+    <div class="filter-container">
+      <select id="filter" onchange="filterTasks()">
+        <option value="">Semua</option>
+        <option value="Kuliah">Kuliah</option>
+        <option value="Organisasi">Organisasi</option>
+        <option value="Pribadi">Pribadi</option>
+      </select>
     </div>
-    
-    <div id="task-container" class="hidden">
-        <nav class="navbar">
-            <h2>Manajemen Tugas</h2>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </nav>
-        <section id="task-form">
-            <h2>Tambah Tugas</h2>
-            <form>
-                <input type="text" id="task-title" placeholder="Judul Tugas" required>
-                <select id="task-category">
-                    <option value="">Pilih Kategori</option>
-                    <option value="Kuliah">Kuliah</option>
-                    <option value="Organisasi">Organisasi</option>
-                    <option value="Pribadi">Pribadi</option>
-                </select>
-                <input type="date" id="task-deadline" required>
-                <button onclick="addTask()">Tambah</button>
-            </form>
-        </section>
-        <section id="task-list">
-            <h2>Daftar Tugas</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="task-list-body">
-                    <!-- Tugas akan ditampilkan di sini -->
-                </tbody>
-            </table>
-        </section>
+
+    <br>
+    <table id="task-table" border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Judul</th>
+          <th>Kategori</th>
+          <th>Deadline</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="task-list"></tbody>
+    </table>
+
+    <div id="editModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Edit Tugas</h2>
+        <form id="editForm">
+          <label for="newTitle">Judul:</label>
+          <input type="text" id="newTitle" name="newTitle" placeholder="Judul Tugas" required>
+          <label for="newCategory">Kategori:</label>
+          <select id="newCategory" name="newCategory" required>
+            <option value="Kuliah">Kuliah</option>
+            <option value="Organisasi">Organisasi</option>
+            <option value="Pribadi">Pribadi</option>
+          </select>
+          <label for="newDeadline">Deadline (YYYY-MM-DD):</label>
+          <input type="date" id="newDeadline" name="newDeadline" required>
+          <div class="status-container">
+            <input type="checkbox" id="newStatus">
+            <label for="newStatus">Tugas Selesai</label>
+          </div>        
+          <div class="button-group">
+            <button type="button" class="close-btn" onclick="closeModal()">Batal</button>
+            <button type="submit">Simpan Perubahan</button>
+          </div>
+        </form>
+      </div>
     </div>
-    
-    <script src="script.js"></script>
+  </div>
+
+  <script src="script.js"></script>
+  
 </body>
+
 </html>

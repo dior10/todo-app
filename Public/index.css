@@ -1,111 +1,259 @@
 body {
+    background-image: url('/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-nav {
-    background-color: #007bff;
-    padding: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7fbbd;
+    flex-direction: column;
 }
 
 .container {
-    max-width: 400px;
-    background: white;
+    margin: 20px auto;
     padding: 20px;
-    margin: 30px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .input-group {
     position: relative;
-    margin: 20px 0;
+    margin: 15px 0;
+    width: 100%;
 }
 
-input, select {
+.input-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
 }
 
-button {
-    background: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.input-group label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #666;
+    transition: 0.3s ease-in-out;
+    pointer-events: none;
 }
 
-button:hover {
-    background: #0056b3;
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: 5px;
+    font-size: 12px;
+    color: #333;
+    background: #ffffff;
+    padding: 0 5px;
 }
 
 .hidden {
     display: none;
 }
 
-#task-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #007bff;
-    color: white;
-    padding: 15px;
+    color: black;
+    padding: 10px 15px;
     border-radius: 5px;
+    width: 1100px;
+    margin-bottom: -10px;
 }
 
 .logout-btn {
-    background: red;
-    border: none;
+    padding: 5px 10px; 
+    font-size: 14px;
+    width: 100px;
+    background-color: red;
+}
+
+
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+
+input,
+select,
+button {
+    margin: 5px 0;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+    background-color: #b5c5ff;
+    border-radius: 10px;
+    border: 0;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+a {
+    cursor: pointer;
+    color: #0a84ff;
+    text-decoration: underline;
+}
+
+h2,
+p {
+    text-align: center;
+    color: #000000;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#filter {
+    padding: 8px;
+    font-size: 14px;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+#task-table {
+    width: 200%;
+    width: 1100px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+#task-table th,
+#task-table td {
+    text-align: center;
     padding: 10px;
-    color: white;
+    font-size: 14px;
+    border: 1px solid #ddd;
+}
+
+#task-table th {
+    background-color: #f7fbbd;
+}
+
+#task-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#tambahtugas-container {
+    width: 80%;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-left: 100px;
+}
+
+.modal {
+    display: none; /* Akan diubah ke grid saat modal aktif */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-items: center;
+}
+
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    margin-right: 200px;
+}
+
+.status-container label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.button-group {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.button-group button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
 }
 
-#task-list table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-#task-list th, #task-list td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-#task-list th {
-    background: #007bff;
+.close-btn {
+    background: #ff3b3b;
     color: white;
+}
+
+.close-btn:hover {
+    background: #d32f2f;
+}
+
+.button-group button[type="submit"] {
+    background: #4CAF50;
+    color: white;
+}
+
+.button-group button[type="submit"]:hover {
+    background: #45a049;
 }
